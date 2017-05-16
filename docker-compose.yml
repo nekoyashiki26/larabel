@@ -10,6 +10,7 @@ services:
             - "8000:80"
         links:
             - app
+        container_name: web
     app:
         build:
             context: ./
@@ -19,6 +20,7 @@ services:
         links:
             - mysql
             - redis
+        container_name: app
     mysql:
         restart: always
         image: mysql:latest
@@ -29,6 +31,7 @@ services:
             - "MYSQL_DATABASE=laraveltest"
         ports:
             - "3306:3306"
+        container_name: mysql
     redis:
         restart: always
         image: redis:latest
@@ -36,5 +39,6 @@ services:
             - ./redis:/data
         ports:
             - "6379:6379"
+        container_name: redis
         command: redis-server --appendonly yes
 
