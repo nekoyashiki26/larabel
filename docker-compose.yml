@@ -22,7 +22,6 @@ services:
             - redis
         container_name: app
     mysql:
-        restart: always
         image: mysql:latest
         volumes:
             - ./mysql:/var/lib/mysql
@@ -33,7 +32,6 @@ services:
             - "3306:3306"
         container_name: mysql
     redis:
-        restart: always
         image: redis:latest
         volumes:
             - ./redis:/data
