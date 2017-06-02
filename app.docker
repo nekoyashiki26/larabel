@@ -1,5 +1,7 @@
 FROM php:7-fpm
 
+WORKDIR /var/www
+
 RUN apt-get update && apt-get install -y libmcrypt-dev mysql-client \
     && docker-php-ext-install mcrypt pdo_mysql && \
     #zip,unzip
@@ -11,7 +13,16 @@ RUN apt-get update && apt-get install -y libmcrypt-dev mysql-client \
     mv composer.phar /usr/local/bin/composer && \
     #user追加
     useradd -m -s /bin/bash -u 1000 lara && \
+    chown -R lara:lara /var/www && \
+    composer create-project --prefer-dist laravel/laravel laravel && \
+
+    #redis使うのに必要なpredisをcomposerに追加
+    cd laravel && \
+    composer require predis/predis && \
+
+    #/var/www以下ののディレクトリとファイルのアクセス権を変更
+    find /var/www -type d -exec chmod 770 {} && \
+    find /var/www -type f -exec chmod 770 {} && \
     #www.conf修正
     sed -i 's/user\ \=\ www-data/user\ \=\ lara/g' /usr/local/etc/php-fpm.d/www.conf && \
     sed -i 's/group\ \=\ www-data/group\ \=\ lara/g' /usr/local/etc/php-fpm.d/www.conf
-WORKDIR /var/www
