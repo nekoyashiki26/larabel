@@ -1,4 +1,4 @@
 # larabel
 ---
-- Laravel�̊���Docker-compose���g���č\�z���Ă��܂��B
-- �N������Laravel�̃C���X�g�[���܂ł�邩�猋�\�d����������܂���B
+- Laravelの環境をDocker-composeを使って構築しています。
+- 起動時にLaravelのインストールまでやるから結構重いかもしれません。
