@@ -2,14 +2,18 @@ FROM php:7-fpm
 
 WORKDIR /var/www
 
-RUN apt-get update && apt-get install -y libmcrypt-dev mysql-client \
-    && docker-php-ext-install mcrypt pdo_mysql && \
+RUN apt-get update  
+RUN apt-get install -y libmcrypt-dev mysql-client 
+RUN docker-php-ext-install mcrypt pdo_mysql
     #zip,unzip
-    apt-get install -y zip unzip zsh && \
+RUN apt-get install -y zip 
+RUN apt-get install -y unzip 
+RUN apt-get install -y zsh
     #vim
-    apt-get install -y vim && \
+RUN apt-get install -y vim
+RUN apt-get install -y git
     #composer
-    curl -sS https://getcomposer.org/installer | php && \
+RUN curl -sS https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer && \
     #user追加
     useradd -m -s /bin/bash -u 1000 lara && \
