@@ -26,8 +26,8 @@ services:
         volumes:
             - ./mysql:/var/lib/mysql
         environment:
-            - "MYSQL_ROOT_PASSWORD=secret"
-            - "MYSQL_DATABASE=laraveltest"
+            - "MYSQL_ROOT_PASSWORD=root"
+            - "MYSQL_DATABASE=kitsecctf"
         ports:
             - "3306:3306"
         container_name: mysql
